@@ -106,8 +106,7 @@ module.exports = function (prisma, contactLimiter) {
     res.render('pages/projects', { title: 'Projects — Shayan Ahmed', projects });
   });
 
-  router.get('/certifications', async (req, res) => {
-    const dbCerts = await prisma.certification.findMany({ orderBy: { date: 'desc' } });
+  router.get('/certifications', (req, res) => {
     const cvCerts = [
       { title: 'Python Programming with Artificial Intelligence', issuer: 'Szabist ZabTech', duration: '10 Months' },
       { title: 'Cybersecurity & Ethical Hacking', issuer: 'QUEST Nawabshah', duration: '4 Months' },
@@ -118,7 +117,7 @@ module.exports = function (prisma, contactLimiter) {
       { title: 'Cybersecurity 101', issuer: 'TryHackMe', duration: 'Certified' },
       { title: 'Certified in Cybersecurity', issuer: 'ISC2', duration: 'Certified' }
     ];
-    res.render('pages/certifications', { title: 'Certifications — Shayan Ahmed', certs: dbCerts, cvCerts });
+    res.render('pages/certifications', { title: 'Certifications — Shayan Ahmed', cvCerts });
   });
 
   router.get('/mission', async (req, res) => {
