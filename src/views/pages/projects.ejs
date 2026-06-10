@@ -1,0 +1,53 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Project <span class="accent">Gallery</span></h1>
+    <div class="section-line"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="projects-gallery">
+      <% if (projects && projects.length) { %>
+        <% projects.forEach(function(project) { %>
+          <div class="gallery-item" data-id="<%= project.id %>">
+            <div class="gallery-image">
+              <% if (project.imageUrl) { %>
+                <img src="<%= project.imageUrl %>" alt="<%= project.title %>" loading="lazy">
+              <% } else { %>
+                <div class="gallery-placeholder"><i class="fas fa-shield"></i></div>
+              <% } %>
+              <div class="gallery-overlay">
+                <div class="gallery-info">
+                  <h3><%= project.title %></h3>
+                  <p><%= project.description?.substring(0, 100) %></p>
+                  <button class="btn btn-small gallery-details-btn" data-id="<%= project.id %>">View Details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="empty-state full">
+          <i class="fas fa-folder-open"></i>
+          <h3>No Projects Yet</h3>
+          <p>Projects are being added. Check back soon.</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="projectModal">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-loader"><i class="fas fa-spinner fa-spin"></i></div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

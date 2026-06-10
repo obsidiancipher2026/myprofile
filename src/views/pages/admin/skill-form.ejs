@@ -1,0 +1,15 @@
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+<section class="section">
+  <div class="container">
+    <h1><%= skill ? 'Edit' : 'New' %> Skill</h1>
+    <form action="/admin/skills<%= skill ? '/' + skill.id : '' %>" method="POST" class="admin-form">
+      <div class="form-group"><label>Name</label><input type="text" name="name" value="<%= skill ? skill.name : '' %>" required></div>
+      <div class="form-group"><label>Level (0-100)</label><input type="number" name="level" min="0" max="100" value="<%= skill ? skill.level : '50' %>"></div>
+      <div class="form-group"><label>Category</label><input type="text" name="category" value="<%= skill ? skill.category : '' %>"></div>
+      <div class="form-group"><label>Sort Order</label><input type="number" name="sortOrder" value="<%= skill ? skill.sortOrder : '0' %>"></div>
+      <button type="submit" class="btn btn-primary"><%= skill ? 'Update' : 'Create' %> Skill</button>
+    </form>
+  </div>
+</section>
+<%- include('../../partials/footer') %>

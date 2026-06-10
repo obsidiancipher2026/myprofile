@@ -1,0 +1,22 @@
+<header class="cyber-header">
+  <nav class="nav-container">
+    <a href="/" class="nav-logo">
+      <span class="logo-icon"><i class="fas fa-shield"></i></span>
+      <span class="logo-text">CGS<span class="logo-dot">.</span><span class="logo-accent">SecOps</span></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/" class="<%= path === '/' ? 'active' : '' %>">Home</a></li>
+      <li><a href="/about" class="<%= path === '/about' ? 'active' : '' %>">About</a></li>
+      <li><a href="/projects" class="<%= path?.startsWith('/projects') ? 'active' : '' %>">Projects</a></li>
+      <li><a href="/certifications" class="<%= path === '/certifications' ? 'active' : '' %>">Certifications</a></li>
+      <li><a href="/mission" class="<%= path === '/mission' ? 'active' : '' %>">Mission</a></li>
+      <li><a href="/skills" class="<%= path === '/skills' ? 'active' : '' %>">Skills</a></li>
+      <li><a href="/education" class="<%= path === '/education' ? 'active' : '' %>">Education</a></li>
+      <li><a href="/contact" class="<%= path === '/contact' ? 'active' : '' %>">Contact</a></li>
+    </ul>
+    <div class="nav-backdrop" id="navBackdrop"></div>
+  </nav>
+</header>

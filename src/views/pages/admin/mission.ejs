@@ -1,0 +1,12 @@
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+<section class="section">
+  <div class="container">
+    <h1>Edit Mission</h1>
+    <form action="/admin/mission" method="POST" class="admin-form">
+      <div class="form-group"><label>Mission Statement</label><textarea name="content" rows="6" required><%= mission ? mission.content : '' %></textarea></div>
+      <button type="submit" class="btn btn-primary">Update Mission</button>
+    </form>
+  </div>
+</section>
+<%- include('../../partials/footer') %>

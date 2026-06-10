@@ -1,0 +1,74 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Contact <span class="accent">Me</span></h1>
+    <div class="section-line"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Let's Secure the Future Together</h3>
+        <p>Open to collaborations with organizations tackling intricate security challenges.</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>cyberguardiansociety2026@gmail.com</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Available Worldwide</span>
+          </div>
+        </div>
+        <div class="contact-social">
+          <a href="/social/linkedin" target="_blank" rel="noopener" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+          <a href="/social/github" target="_blank" rel="noopener" class="social-icon github"><i class="fab fa-github"></i></a>
+          <a href="/social/youtube" target="_blank" rel="noopener" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+          <a href="/social/whatsapp" target="_blank" rel="noopener" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="contact-cv">
+          <a href="/cv/download" class="btn btn-primary"><i class="fas fa-download"></i> Download CV</a>
+        </div>
+      </div>
+      <div class="contact-form-wrapper">
+        <% if (typeof success !== 'undefined' && success) { %>
+          <div class="success-message">
+            <i class="fas fa-check-circle"></i>
+            <p><%= success %></p>
+          </div>
+        <% } else { %>
+          <% if (typeof errors !== 'undefined' && errors && errors.length) { %>
+            <div class="error-message">
+              <i class="fas fa-exclamation-triangle"></i>
+              <ul><% errors.forEach(function(e) { %><li><%= e %></li><% }); %></ul>
+            </div>
+          <% } %>
+          <form action="/contact" method="POST" class="contact-form" novalidate>
+            <input type="hidden" name="_csrf" value="">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" value="<%= typeof form !== 'undefined' && form.name ? form.name : '' %>" placeholder="Your Name" required minlength="2">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" value="<%= typeof form !== 'undefined' && form.email ? form.email : '' %>" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6" placeholder="Tell me about your security challenges..." required minlength="10"><%= typeof form !== 'undefined' && form.message ? form.message : '' %></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

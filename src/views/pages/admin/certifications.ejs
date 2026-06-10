@@ -1,0 +1,30 @@
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+<section class="section">
+  <div class="container">
+    <div class="admin-header"><h1>Manage Certifications</h1><a href="/admin/certifications/new" class="btn btn-primary"><i class="fas fa-plus"></i> Add Certification</a></div>
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead><tr><th>Title</th><th>Issuer</th><th>Date</th><th>Actions</th></tr></thead>
+        <tbody>
+          <% if (certs && certs.length) { %>
+            <% certs.forEach(function(c) { %>
+            <tr>
+              <td><%= c.title %></td>
+              <td><%= c.issuer %></td>
+              <td><%= new Date(c.date).toLocaleDateString() %></td>
+              <td class="actions">
+                <a href="/admin/certifications/<%= c.id %>/edit" class="btn btn-small"><i class="fas fa-edit"></i></a>
+                <form action="/admin/certifications/<%= c.id %>/delete" method="POST" style="display:inline"><button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Delete?')"><i class="fas fa-trash"></i></button></form>
+              </td>
+            </tr>
+            <% }); %>
+          <% } else { %>
+            <tr><td colspan="4" class="empty-state">No certifications yet.</td></tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<%- include('../../partials/footer') %>

@@ -1,0 +1,32 @@
+{
+  "name": "shayan-ahmed-portfolio",
+  "version": "1.0.0",
+  "description": "Cyber-Classical portfolio platform for Shayan Ahmed",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "npx prisma db push --accept-data-loss && node prisma/seed.js && node src/server.js",
+    "dev": "npx prisma db push --accept-data-loss && node prisma/seed.js && node --watch src/server.js",
+    "setup": "npx prisma generate && npx prisma db push && node prisma/seed.js",
+    "vercel-build": "npx prisma generate && npx prisma db push && node prisma/seed.js",
+    "postinstall": "npx prisma generate",
+    "prisma:push": "npx prisma db push",
+    "prisma:seed": "node prisma/seed.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.1",
+    "express-session": "^1.18.1",
+    "helmet": "^8.0.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.16",
+    "xss": "^1.0.15"
+  },
+  "devDependencies": {
+    "prisma": "^5.22.0"
+  }
+}

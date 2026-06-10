@@ -1,0 +1,44 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="hero-glitch-bg"></div>
+    <h1>Technical <span class="accent">Skills</span></h1>
+    <div class="section-line"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="skills-grid">
+      <% const iconMap = {
+        'Ethical Hacking': 'fa-skull', 'Bug Bounty Hunting': 'fa-bug', 'OSINT & Reconnaissance': 'fa-search',
+        'Threat Hunting': 'fa-crosshairs', 'Python Development': 'fa-code', 'Networking Analysis': 'fa-network-wired',
+        'Malware Investigation': 'fa-flask', 'AI-driven Security Tools': 'fa-robot'
+      }; %>
+      <% skills.forEach(function(skill, idx) { %>
+        <div class="skill-card" style="animation-delay: <%= idx * 0.08 %>s">
+          <div class="skill-card-inner">
+            <div class="skill-card-icon">
+              <i class="fas <%= iconMap[skill.name] || 'fa-shield' %>"></i>
+            </div>
+            <h3 class="skill-card-title"><%= skill.name %></h3>
+            <% if (skill.category) { %><span class="skill-card-subtitle"><%= skill.category %></span><% } %>
+            <div class="skill-card-bar">
+              <div class="skill-card-fill" style="width: 0%" data-level="<%= skill.level %>">
+                <div class="skill-card-glow"></div>
+              </div>
+            </div>
+            <div class="skill-card-level">
+              <span class="skill-card-pct"><%= skill.level %>%</span>
+              <span class="skill-card-label">Proficiency</span>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

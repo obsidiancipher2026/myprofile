@@ -1,0 +1,153 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-circuit">
+    <div class="hero-circuit-line h" style="top:18%;left:5%;width:120px;"></div>
+    <div class="hero-circuit-line h" style="top:18%;left:40%;width:80px;"></div>
+    <div class="hero-circuit-line h" style="top:32%;left:60%;width:100px;"></div>
+    <div class="hero-circuit-line h" style="top:50%;left:10%;width:60px;"></div>
+    <div class="hero-circuit-line h" style="top:50%;left:55%;width:140px;"></div>
+    <div class="hero-circuit-line h" style="top:68%;left:25%;width:90px;"></div>
+    <div class="hero-circuit-line h" style="top:82%;left:45%;width:110px;"></div>
+    <div class="hero-circuit-line v" style="top:10%;left:15%;height:100px;"></div>
+    <div class="hero-circuit-line v" style="top:10%;left:15%;height:100px;"></div>
+    <div class="hero-circuit-line v" style="top:25%;left:48%;height:150px;"></div>
+    <div class="hero-circuit-line v" style="top:40%;left:72%;height:80px;"></div>
+    <div class="hero-circuit-line v" style="top:60%;left:20%;height:120px;"></div>
+    <div class="hero-circuit-line v" style="top:70%;left:65%;height:90px;"></div>
+    <div class="hero-circuit-dot" style="top:18%;left:5%;"></div>
+    <div class="hero-circuit-dot" style="top:18%;left:40%;"></div>
+    <div class="hero-circuit-dot" style="top:32%;left:60%;"></div>
+    <div class="hero-circuit-dot" style="top:50%;left:10%;"></div>
+    <div class="hero-circuit-dot" style="top:50%;left:55%;"></div>
+    <div class="hero-circuit-dot" style="top:68%;left:25%;"></div>
+    <div class="hero-circuit-dot" style="top:82%;left:45%;"></div>
+  </div>
+  <div class="hero-binary">
+    <span class="hero-binary-char">01101</span>
+    <span class="hero-binary-char">10010</span>
+    <span class="hero-binary-char">00111</span>
+    <span class="hero-binary-char">11001</span>
+    <span class="hero-binary-char">01010</span>
+    <span class="hero-binary-char">10110</span>
+    <span class="hero-binary-char">10001</span>
+    <span class="hero-binary-char">01110</span>
+  </div>
+  <div class="hero-terminal">
+    <span class="hero-terminal-line">root@CGS:~$ nmap -sV target</span>
+    <span class="hero-terminal-line">root@CGS:~$ traceroute 10.0.0.1</span>
+    <span class="hero-terminal-line">root@CGS:~$ ssh -i key.pem root@server</span>
+    <span class="hero-terminal-line">root@CGS:~$ wireshark -i eth0</span>
+    <span class="hero-terminal-line">root@CGS:~$ hashcat -m 0 hash.txt</span>
+    <span class="hero-terminal-line">root@CGS:~$ netstat -tulpn</span>
+  </div>
+  <div class="hero-scanlines"></div>
+  <div class="hero-layout">
+    <div class="hero-content">
+      <div class="hero-badge">Red Team Operator &amp; CTF Player</div>
+      <h1 class="hero-title"><span class="gradient-text">Shayan Ahmed</span></h1>
+      <div class="hero-subtitle">Ethical Hacker &bull; Threat Hunter &bull; Defender</div>
+      <p class="hero-tagline">A Cybersecurity student with an attacker's mindset and a defender's purpose.</p>
+      <div class="hero-actions">
+        <a href="/projects" class="btn btn-primary"><i class="fas fa-shield"></i> View Projects</a>
+        <a href="/contact" class="btn btn-outline"><i class="fas fa-envelope"></i> Contact Me</a>
+        <a href="/cv/download" class="btn btn-ghost"><i class="fas fa-download"></i> Download CV</a>
+      </div>
+      <div class="hero-social">
+        <a href="/social/linkedin" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="/social/github" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="/social/youtube" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="/social/whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="hero-image-frame">
+      <img src="/images/WhatsApp%20Image%202026-03-09%20at%205.52.53%20PM%20(1).jpeg" alt="Shayan Ahmed" class="hero-image">
+    </div>
+  </div>
+  <div class="hero-scroll-indicator">
+    <span>Scroll</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<section id="featured-projects" class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Featured <span class="accent">Projects</span></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <% if (projects && projects.length) { %>
+        <% projects.slice(0, 3).forEach(function(project) { %>
+          <div class="project-card" data-id="<%= project.id %>">
+            <div class="project-card-image">
+              <% if (project.imageUrl) { %>
+                <img src="<%= project.imageUrl %>" alt="<%= project.title %>" loading="lazy">
+              <% } else { %>
+                <div class="project-placeholder">
+                  <i class="fas fa-shield"></i>
+                </div>
+              <% } %>
+              <div class="project-card-overlay">
+                <span class="project-view-btn">View Details <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <h3><%= project.title %></h3>
+              <p><%= project.description?.substring(0, 120) %><%= project.description?.length > 120 ? '...' : '' %></p>
+              <% if (project.techStack) { %>
+                <div class="project-tags">
+                  <% project.techStack.split(',').forEach(function(tag) { %>
+                    <span class="tag"><%= tag.trim() %></span>
+                  <% }); %>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="empty-state">
+          <i class="fas fa-code-branch"></i>
+          <p>Projects coming soon.</p>
+        </div>
+      <% } %>
+    </div>
+    <% if (projects && projects.length > 3) { %>
+      <div class="section-cta">
+        <a href="/projects" class="btn btn-outline">View All Projects <i class="fas fa-arrow-right"></i></a>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+
+<section id="mission-preview" class="section">
+  <div class="container">
+    <div class="mission-block">
+      <div class="mission-icon"><i class="fas fa-bullseye"></i></div>
+      <h2>The <span class="accent">Mission</span></h2>
+      <blockquote>
+        <% if (mission) { %>
+          "<%= mission.content %>"
+        <% } else { %>
+          "To think like an attacker but act as a defender — building proactive cybersecurity solutions that anticipate threats before they strike."
+        <% } %>
+      </blockquote>
+      <a href="/mission" class="btn btn-ghost">Read More <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+
+<div class="modal-overlay" id="projectModal">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-loader"><i class="fas fa-spinner fa-spin"></i></div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

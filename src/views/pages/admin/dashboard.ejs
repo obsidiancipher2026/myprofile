@@ -1,0 +1,24 @@
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+<section class="section">
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+    <div class="section-line"></div>
+    <div class="admin-nav">
+      <a href="/admin/projects" class="admin-nav-link">Projects</a>
+      <a href="/admin/certifications" class="admin-nav-link">Certifications</a>
+      <a href="/admin/skills" class="admin-nav-link">Skills</a>
+      <a href="/admin/mission" class="admin-nav-link">Mission</a>
+      <a href="/admin/messages" class="admin-nav-link">Messages</a>
+      <a href="/admin/logout" class="admin-nav-link logout">Logout</a>
+    </div>
+    <div class="admin-stats">
+      <div class="stat-card"><h3><%= stats.projects %></h3><p>Projects</p></div>
+      <div class="stat-card"><h3><%= stats.certs %></h3><p>Certifications</p></div>
+      <div class="stat-card"><h3><%= stats.skills %></h3><p>Skills</p></div>
+      <div class="stat-card"><h3><%= stats.messages %></h3><p>Messages</p></div>
+      <div class="stat-card highlight"><h3><%= stats.unread %></h3><p>Unread</p></div>
+    </div>
+  </div>
+</section>
+<%- include('../../partials/footer') %>

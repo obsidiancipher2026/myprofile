@@ -1,0 +1,50 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>My <span class="accent">Mission</span></h1>
+    <div class="section-line"></div>
+  </div>
+</section>
+
+<section class="section mission-page">
+  <div class="container">
+    <div class="mission-hero-block">
+      <div class="mission-glitch-effect">
+        <div class="mission-shield">
+          <i class="fas fa-shield"></i>
+        </div>
+      </div>
+      <blockquote class="mission-statement">
+        <% if (mission) { %>
+          "<%= mission.content %>"
+        <% } else { %>
+          "To think like an attacker but act as a defender — building proactive cybersecurity solutions that anticipate threats before they strike."
+        <% } %>
+      </blockquote>
+      <div class="mission-signature">
+        <span class="accent">— Shayan Ahmed</span>
+      </div>
+    </div>
+    <div class="mission-values">
+      <div class="value-card">
+        <i class="fas fa-eye"></i>
+        <h3>Think Like an Attacker</h3>
+        <p>Understanding adversarial mindset to predict and prevent breaches before they happen.</p>
+      </div>
+      <div class="value-card">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Act Like a Defender</h3>
+        <p>Building robust defenses with proactive monitoring, detection, and response strategies.</p>
+      </div>
+      <div class="value-card">
+        <i class="fas fa-robot"></i>
+        <h3>Innovate with AI</h3>
+        <p>Leveraging artificial intelligence to create next-generation security tools and solutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

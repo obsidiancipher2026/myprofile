@@ -1,0 +1,28 @@
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+<section class="section">
+  <div class="container">
+    <h1>Contact Messages</h1>
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead><tr><th>Name</th><th>Email</th><th>Message</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          <% messages.forEach(function(m) { %>
+          <tr class="<%= m.read ? '' : 'unread' %>">
+            <td><%= m.name %></td>
+            <td><%= m.email %></td>
+            <td class="msg-preview"><%= m.message.substring(0, 80) %><%= m.message.length > 80 ? '...' : '' %></td>
+            <td><%= new Date(m.createdAt).toLocaleDateString() %></td>
+            <td><%= m.read ? 'Read' : 'Unread' %></td>
+            <td class="actions">
+              <% if (!m.read) { %><form action="/admin/messages/<%= m.id %>/read" method="POST" style="display:inline"><button type="submit" class="btn btn-small"><i class="fas fa-check"></i></button></form><% } %>
+              <form action="/admin/messages/<%= m.id %>/delete" method="POST" style="display:inline"><button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Delete this message?')"><i class="fas fa-trash"></i></button></form>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<%- include('../../partials/footer') %>

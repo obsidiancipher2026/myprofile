@@ -1,0 +1,62 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Certifications</h1>
+    <div class="section-line"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <% if (certs && certs.length) { %>
+      <div class="section-header">
+        <h2>Online <span class="accent">Credentials</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="certs-grid">
+        <% certs.forEach(function(cert) { %>
+          <div class="cert-card">
+            <div class="cert-card-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <div class="cert-card-body">
+              <h3><%= cert.title %></h3>
+              <div class="cert-meta">
+                <span><i class="fas fa-building"></i> <%= cert.issuer %></span>
+                <span><i class="fas fa-calendar"></i> <%= new Date(cert.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) %></span>
+              </div>
+              <% if (cert.credentialUrl) { %>
+                <a href="<%= cert.credentialUrl %>" target="_blank" rel="noopener" class="btn btn-small btn-outline">Verify Credential <i class="fas fa-external-link-alt"></i></a>
+              <% } %>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } %>
+
+    <div class="section-header" style="margin-top: <%= certs && certs.length ? '60px' : '0' %>">
+      <h2>On-Site <span class="accent">Certifications</span></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="certs-row">
+      <% cvCerts.forEach(function(cert) { %>
+        <div class="cert-card-h">
+          <div class="cert-card-h-icon">
+            <i class="fas fa-scroll"></i>
+          </div>
+          <div class="cert-card-h-body">
+            <h4><%= cert.title %></h4>
+            <% if (cert.issuer) { %>
+              <span class="cert-h-issuer"><i class="fas fa-building"></i> <%= cert.issuer %></span>
+            <% } %>
+            <span class="cert-h-duration"><i class="fas fa-clock"></i> <%= cert.duration %></span>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

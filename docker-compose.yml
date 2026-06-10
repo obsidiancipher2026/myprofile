@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: portfolio_user
+      POSTGRES_PASSWORD: portfolio_pass
+      POSTGRES_DB: portfolio_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U portfolio_user"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://portfolio_user:portfolio_pass@postgres:5432/portfolio_db?schema=public"
+      SESSION_SECRET: "change-this-to-a-random-secret-in-production"
+      NODE_ENV: production
+      PORT: 3000
+      ADMIN_EMAIL: "shayan@example.com"
+      ADMIN_PASSWORD: "Chang3Th1sN0w!"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - uploads:/app/src/public/uploads
+
+volumes:
+  pgdata:
+  uploads:
