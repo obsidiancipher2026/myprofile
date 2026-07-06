@@ -16,11 +16,9 @@ module.exports = function (prisma, contactLimiter) {
       { id: 'r3', title: 'DeepShield Deepfake Detection Platform', description: 'An AI-powered platform for detecting deepfake media using machine learning models trained on synthetic and manipulated media datasets.', techStack: 'Python, TensorFlow, OpenCV, Flask, React', imageUrl: null },
     ];
     const projects = [...realProjects, ...dbProjects];
-    const mission = await prisma.mission.findFirst({ where: { active: true } });
     res.render('pages/index', {
       title: 'Shayan Ahmed | Cybersecurity Specialist & Full Stack Developer',
       projects,
-      mission,
     });
   });
 
@@ -127,11 +125,6 @@ module.exports = function (prisma, contactLimiter) {
       { title: 'Hacktheon Sejong International Cybersecurity Competition (South Korea)', rank: '15th Position', type: 'silver' },
     ];
     res.render('pages/achievements', { title: 'Achievements — Shayan Ahmed', achievements });
-  });
-
-  router.get('/mission', async (req, res) => {
-    const mission = await prisma.mission.findFirst({ where: { active: true } });
-    res.render('pages/mission', { title: 'Mission — Shayan Ahmed', mission });
   });
 
   router.get('/skills', async (req, res) => {
