@@ -11,33 +11,16 @@ module.exports = function (prisma, contactLimiter) {
   router.get('/', async (req, res) => {
     const dbProjects = await prisma.project.findMany({ orderBy: { createdAt: 'desc' } });
     const realProjects = [
-      { id: 'r1', title: 'Phishing Simulation Toolkit', description: 'Built a Python-based phishing simulation framework that automates email campaigns, tracks open/click rates, and generates security awareness reports for organizations.', techStack: 'Python, SMTP, SQLite, ReportLab', imageUrl: null },
-      { id: 'r2', title: 'Network Vulnerability Scanner', description: 'Developed a multi-threaded port scanner with service detection, CVE matching, and detailed reporting. Scans up to 1000 hosts concurrently.', techStack: 'Python, Nmap, Socket Programming, SQLite', imageUrl: null },
-      { id: 'r3', title: 'SOC Log Analyzer & Alert System', description: 'A security operations dashboard that ingests syslog and Windows Event Logs, correlates IOCs, and triggers real-time Slack/email alerts.', techStack: 'Python, Elasticsearch, Kibana, Sigma Rules', imageUrl: null },
+      { id: 'r1', title: 'CGS CTF 2026 Platform', description: 'A Capture The Flag competition platform built for CyberGuardiansSociety, featuring dynamic challenges, real-time scoring, and Docker-based challenge isolation.', techStack: 'Node.js, Express, MongoDB, Docker, EJS, Socket.io', imageUrl: null },
+      { id: 'r2', title: 'CGS Community Website 2026', description: 'The public-facing website for the CyberGuardiansSociety community, built with modern web technologies for seamless user experience.', techStack: 'React, Next.js, Tailwind CSS, PostgreSQL', imageUrl: null },
+      { id: 'r3', title: 'DeepShield Deepfake Detection Platform', description: 'An AI-powered platform for detecting deepfake media using machine learning models trained on synthetic and manipulated media datasets.', techStack: 'Python, TensorFlow, OpenCV, Flask, React', imageUrl: null },
     ];
     const projects = [...realProjects, ...dbProjects];
-    const certs = await prisma.certification.findMany({ orderBy: { date: 'desc' } });
     const mission = await prisma.mission.findFirst({ where: { active: true } });
-    let dbSkills = await prisma.skill.findMany({ orderBy: { sortOrder: 'asc' } });
-    if (!dbSkills.length) {
-      dbSkills = [
-        { name: 'Ethical Hacking', level: 90, category: 'Offensive Security' },
-        { name: 'Threat Hunting', level: 85, category: 'Defensive Security' },
-        { name: 'Python Development', level: 92, category: 'Development' },
-        { name: 'Networking Analysis', level: 85, category: 'Infrastructure' },
-        { name: 'Malware Investigation', level: 80, category: 'Reverse Engineering' },
-        { name: 'AI-driven Security Tools', level: 75, category: 'Innovation' },
-        { name: 'Bug Bounty Hunting', level: 78, category: 'Offensive Security' },
-        { name: 'OSINT & Reconnaissance', level: 82, category: 'Intelligence Gathering' },
-      ];
-    }
-    const skills = dbSkills;
     res.render('pages/index', {
-      title: 'Shayan Ahmed — Cybersecurity Portfolio',
+      title: 'Shayan Ahmed | Cybersecurity Specialist & Full Stack Developer',
       projects,
-      certs,
       mission,
-      skills,
     });
   });
 
@@ -46,58 +29,61 @@ module.exports = function (prisma, contactLimiter) {
   });
 
   router.get('/projects', async (req, res) => {
-    const category = req.query.category;
-    const where = category ? { category } : {};
-    const dbProjects = await prisma.project.findMany({
-      where,
-      orderBy: { createdAt: 'desc' },
-    });
+    const dbProjects = await prisma.project.findMany({ orderBy: { createdAt: 'desc' } });
     const realProjects = [
       {
         id: 'r1',
-        title: 'Phishing Simulation Toolkit',
-        description: 'A comprehensive phishing simulation framework designed for security awareness training in organizations.<br><br><b>Key Features:</b><br>• Automated email campaign creation with customizable HTML templates<br>• Real-time open/click tracking with geo-location logging<br>• Security awareness report generation (PDF)<br>• Target list management with CSV import<br>• Multi-round campaign support with progress tracking',
-        techStack: 'Python, SMTP, HTML/CSS, SQLite, ReportLab, Jinja2',
-        projectUrl: null,
-        imageUrl: null,
-      },
-      {
-        id: 'r2',
-        title: 'Network Vulnerability Scanner',
-        description: 'A high-performance multi-threaded network scanner that identifies open ports, running services, and potential vulnerabilities across large network ranges.<br><br><b>Key Features:</b><br>• Multi-threaded architecture scanning 1000+ hosts concurrently<br>• Service fingerprinting and version detection<br>• CVE database matching for identified services<br>• Customizable scan profiles (Quick, Full, Stealth)<br>• JSON and HTML report export with severity ratings',
-        techStack: 'Python, Nmap, Socket Programming, JSON, SQLite, threading',
-        projectUrl: null,
-        imageUrl: null,
-      },
-      {
-        id: 'r3',
-        title: 'SOC Log Analyzer & Alert System',
-        description: 'A centralized security operations dashboard that aggregates logs from multiple sources, detects threats using Sigma rules, and triggers real-time alerts.<br><br><b>Key Features:</b><br>• Syslog and Windows Event Log ingestion pipeline<br>• Custom Sigma rule engine for threat correlation<br>• Real-time alerting via Slack webhooks and email<br>• Interactive Kibana dashboards for log visualization<br>• Case management system for incident tracking',
-        techStack: 'Python, Elasticsearch, Kibana, Sigma Rules, Slack API, Logstash',
-        projectUrl: null,
-        imageUrl: null,
-      },
-      {
-        id: 'r4',
-        title: 'Steganography Detection Tool',
-        description: 'A forensic CLI tool that uncovers hidden data embedded within image files using multiple detection techniques.<br><br><b>Key Features:</b><br>• LSB (Least Significant Bit) analysis for hidden payloads<br>• Histogram comparison to detect anomalies<br>• EXIF and metadata extraction and analysis<br>• Support for PNG, JPEG, BMP, and GIF formats<br>• Batch processing mode for multiple files',
-        techStack: 'Python, PIL, NumPy, OpenCV, struct',
-        projectUrl: null,
-        imageUrl: null,
-      },
-      {
-        id: 'r5',
-        title: 'CTF Challenge Platform',
-        description: 'A fully-featured Capture The Flag platform built for hosting cybersecurity competitions with dynamic challenges and real-time scoring.<br><br><b>Key Features:</b><br>• Web exploitation, cryptography, OSINT, and forensics challenges<br>• Dynamic scoring that decreases with each solve<br>• Progressive hint system with point penalties<br>• Real-time leaderboard with live updates<br>• Docker-based challenge isolation for security',
+        title: 'CGS CTF 2026 Platform',
+        description: 'A fully-featured Capture The Flag competition platform built for CyberGuardiansSociety. Features dynamic challenges spanning web exploitation, cryptography, OSINT, and forensics, with real-time scoring, progressive hints, and Docker-based challenge isolation for secure competition hosting.',
         techStack: 'Node.js, Express, MongoDB, Docker, EJS, Socket.io',
         projectUrl: null,
         imageUrl: null,
       },
       {
+        id: 'r2',
+        title: 'CGS Community Website 2026',
+        description: 'The public website for the CyberGuardiansSociety community. Built to serve as a hub for cybersecurity enthusiasts with resources, event information, blog content, and community engagement features.',
+        techStack: 'React, Next.js, Tailwind CSS, PostgreSQL',
+        projectUrl: null,
+        imageUrl: null,
+      },
+      {
+        id: 'r3',
+        title: 'Student Management System',
+        description: 'A comprehensive system for managing student records, attendance, grades, and administrative workflows. Designed for educational institutions to centralize student data management.',
+        techStack: 'Python, Django, SQLite, HTML/CSS, JavaScript',
+        projectUrl: null,
+        imageUrl: null,
+      },
+      {
+        id: 'r4',
+        title: 'DeepShield Deepfake Detection Platform',
+        description: 'An AI-powered platform for detecting deepfake media. Utilizes machine learning models trained on extensive datasets of manipulated images and videos to identify synthetic content with high accuracy.',
+        techStack: 'Python, TensorFlow, OpenCV, Flask, React, AI/ML',
+        projectUrl: null,
+        imageUrl: null,
+      },
+      {
+        id: 'r5',
+        title: 'Web Based Vulnerability Scanner',
+        description: 'A browser-based security scanning tool that identifies common web vulnerabilities including XSS, SQL injection, CSRF, and misconfigurations. Generates detailed reports with remediation guidance.',
+        techStack: 'Python, Flask, JavaScript, SQLite, Burpsuite',
+        projectUrl: null,
+        imageUrl: null,
+      },
+      {
         id: 'r6',
-        title: 'Wi-Fi Deauth Detection & Prevention',
-        description: 'A Raspberry Pi-based intrusion detection system that monitors 802.11 Wi-Fi networks for deauthentication attacks and responds automatically.<br><br><b>Key Features:</b><br>• Real-time deauth packet detection using Scapy<br>• Offender MAC address logging with timestamps<br>• Push notification alerts via Twilio SMS<br>• Automated countermeasure deployment<br>• Web dashboard for historical attack review',
-        techStack: 'Python, Scapy, Raspberry Pi, Twilio API, SQLite, Flask',
+        title: 'AI Powered Phishing Detector',
+        description: 'A machine learning-based tool for identifying phishing attempts in emails and web pages. Analyzes content, headers, URLs, and metadata to classify threats with high precision.',
+        techStack: 'Python, Scikit-learn, Flask, NLP, JavaScript',
+        projectUrl: null,
+        imageUrl: null,
+      },
+      {
+        id: 'r7',
+        title: 'AetherCode Project Listing Marketplace',
+        description: 'A marketplace-style website for listing and discovering software projects. Features user profiles, project listings with detailed descriptions, tag-based discovery, and collaboration tools.',
+        techStack: 'Node.js, Express, MongoDB, EJS, JavaScript, HTML/CSS',
         projectUrl: null,
         imageUrl: null,
       },
@@ -110,14 +96,37 @@ module.exports = function (prisma, contactLimiter) {
     const cvCerts = [
       { title: 'Python Programming with Artificial Intelligence', issuer: 'Szabist ZabTech', duration: '10 Months' },
       { title: 'Cybersecurity & Ethical Hacking', issuer: 'QUEST Nawabshah', duration: '4 Months' },
-      { title: 'Functional English', issuer: '', duration: '4 Months' },
-      { title: 'Microsoft Office', issuer: '', duration: '4 Months' },
-      { title: 'Office Automation & Typing Program', issuer: '', duration: '6 Days' },
-      { title: 'JR Penetration Tester', issuer: 'TryHackMe', duration: 'Certified' },
-      { title: 'Cybersecurity 101', issuer: 'TryHackMe', duration: 'Certified' },
-      { title: 'Certified in Cybersecurity', issuer: 'ISC2', duration: 'Certified' }
+      { title: 'Functional English', issuer: 'Muntaha Skills Development Center', duration: '4 Months' },
+      { title: 'Microsoft Office', issuer: 'Muntaha Skills Development Center', duration: '4 Months' },
+      { title: 'Office Automation & Typing Program', issuer: 'Muntaha Skills Development Center', duration: '6 Days' },
+      { title: 'PITP CTF 2026', issuer: 'Peoples Information Technology Program', duration: 'Certified' },
+      { title: 'Youth Empowerment CTF 2026', issuer: 'Youth Empowerment Program', duration: 'Certified' },
+      { title: 'Junior Cyber Defender', issuer: 'NCERT, Government of Pakistan', duration: 'Certified' },
+      { title: 'BoroCTF 2026', issuer: 'United States of America', duration: 'Certified' },
     ];
-    res.render('pages/certifications', { title: 'Certifications — Shayan Ahmed', cvCerts });
+    const achievements = [
+      { title: 'Peoples Information Technology Program CTF 2026', rank: '1st Position', type: 'gold' },
+      { title: 'Quaid-e-Awam University PITP Final Quest', rank: '7th Position', type: 'silver' },
+      { title: 'Youth Empowerment CTF 2026', rank: '17th Position', type: 'bronze' },
+      { title: 'BoroCTF 2026', rank: '370th Position', type: 'participant' },
+      { title: 'Hacktheon Sejong International Cybersecurity Competition (South Korea)', rank: '15th Position', type: 'silver' },
+    ];
+    res.render('pages/certifications', {
+      title: 'Certifications & Achievements — Shayan Ahmed',
+      cvCerts,
+      achievements,
+    });
+  });
+
+  router.get('/achievements', (req, res) => {
+    const achievements = [
+      { title: 'Peoples Information Technology Program CTF 2026', rank: '1st Position', type: 'gold' },
+      { title: 'Quaid-e-Awam University PITP Final Quest', rank: '7th Position', type: 'silver' },
+      { title: 'Youth Empowerment CTF 2026', rank: '17th Position', type: 'bronze' },
+      { title: 'BoroCTF 2026', rank: '370th Position', type: 'participant' },
+      { title: 'Hacktheon Sejong International Cybersecurity Competition (South Korea)', rank: '15th Position', type: 'silver' },
+    ];
+    res.render('pages/achievements', { title: 'Achievements — Shayan Ahmed', achievements });
   });
 
   router.get('/mission', async (req, res) => {
@@ -126,24 +135,107 @@ module.exports = function (prisma, contactLimiter) {
   });
 
   router.get('/skills', async (req, res) => {
-    let dbSkills = await prisma.skill.findMany({ orderBy: { sortOrder: 'asc' } });
-    if (!dbSkills.length) {
-      dbSkills = [
-        { name: 'Ethical Hacking', level: 90, category: 'Offensive Security' },
-        { name: 'Threat Hunting', level: 85, category: 'Defensive Security' },
-        { name: 'Python Development', level: 92, category: 'Development' },
-        { name: 'Networking Analysis', level: 85, category: 'Infrastructure' },
-        { name: 'Malware Investigation', level: 80, category: 'Reverse Engineering' },
-        { name: 'AI-driven Security Tools', level: 75, category: 'Innovation' },
-        { name: 'Bug Bounty Hunting', level: 78, category: 'Offensive Security' },
-        { name: 'OSINT & Reconnaissance', level: 82, category: 'Intelligence Gathering' },
-      ];
-    }
-    res.render('pages/skills', { title: 'Skills — Shayan Ahmed', skills: dbSkills });
+    const allSkills = [
+      { name: 'Python Programming', category: 'Development', icon: 'fa-code' },
+      { name: 'Cybersecurity & Ethical Hacking', category: 'Security', icon: 'fa-shield' },
+      { name: 'Data Entry Management', category: 'Operations', icon: 'fa-database' },
+      { name: 'Front & Backend Developer', category: 'Development', icon: 'fa-laptop-code' },
+      { name: 'Web Penetration Testing', category: 'Security', icon: 'fa-bug' },
+      { name: 'Digital Forensics', category: 'Security', icon: 'fa-search' },
+      { name: 'Cryptography & Steganography', category: 'Security', icon: 'fa-lock' },
+      { name: 'Full Stack Developer', category: 'Development', icon: 'fa-layer-group' },
+      { name: 'Complete Linux Operating System', category: 'Systems & Tools', icon: 'fa-terminal' },
+      { name: 'Web Data Scraping', category: 'Development', icon: 'fa-spider' },
+      { name: 'Burpsuite & Wireshark Expert', category: 'Systems & Tools', icon: 'fa-network-wired' },
+      { name: 'End-to-End Encrypted Communication', category: 'Security', icon: 'fa-key' },
+      { name: 'Computer Hardware Management', category: 'Operations', icon: 'fa-microchip' },
+    ];
+
+    const categories = [
+      { name: 'Security', icon: 'fa-shield', skills: ['Cybersecurity & Ethical Hacking', 'Web Penetration Testing', 'Digital Forensics', 'Cryptography & Steganography', 'End-to-End Encrypted Communication'] },
+      { name: 'Development', icon: 'fa-code', skills: ['Python Programming', 'Front & Backend Developer', 'Full Stack Developer', 'Web Data Scraping'] },
+      { name: 'Systems & Tools', icon: 'fa-terminal', skills: ['Complete Linux Operating System', 'Burpsuite & Wireshark Expert', 'Computer Hardware Management'] },
+      { name: 'Operations', icon: 'fa-database', skills: ['Data Entry Management'] },
+    ];
+
+    res.render('pages/skills', { title: 'Skills — Shayan Ahmed', skills: allSkills, categories });
   });
 
   router.get('/education', (req, res) => {
-    res.render('pages/education', { title: 'Education — Shayan Ahmed' });
+    const education = [
+      {
+        level: 'SSC (Matriculation)',
+        years: '2022 - 2024',
+        school: 'Quaid-e-Azam Rangers School & College',
+        location: 'Shaheed Benazirabad',
+        parts: [
+          { label: 'SSC-I (Computer)', value: '437 / 550', pct: '79.45%' },
+          { label: 'SSC-II (Science)', value: '855 / 1100', pct: '77.73%' },
+        ],
+        grade: 'A Grade',
+        icon: 'fa-school',
+      },
+      {
+        level: 'HSC (Intermediate)',
+        years: '2024 - 2025',
+        school: 'Quaid-e-Azam Rangers School & College',
+        location: 'Shaheed Benazirabad',
+        parts: [
+          { label: 'HSC-I (Pre-Medical)', value: '392 / 550', pct: '71.27%' },
+          { label: 'HSC-II (Pre-Medical)', value: '802 / 1100', pct: '72.91%' },
+        ],
+        grade: 'A Grade',
+        icon: 'fa-graduation-cap',
+      },
+      {
+        level: 'Bachelor of Science',
+        years: 'In Progress',
+        school: 'BS Cybersecurity',
+        location: 'QUEST Nawabshah',
+        parts: [],
+        grade: 'In Progress',
+        icon: 'fa-user-graduate',
+      },
+    ];
+    res.render('pages/education', { title: 'Education — Shayan Ahmed', education });
+  });
+
+  router.get('/experience', (req, res) => {
+    const experiences = [
+      {
+        company: 'Lal Computer Institute',
+        location: 'Shaheed Benazibad',
+        roles: [
+          { title: 'Data Entry Operator', period: '6 Months' },
+          { title: 'DIT Teacher', period: '1 Month' },
+          { title: 'Junior Administrator', period: '' },
+        ],
+        description: 'Managed data entry operations, taught DIT (Diploma in Information Technology) courses, and served as junior administrator for the institute.',
+        icon: 'fa-building',
+      },
+      {
+        company: 'Lal School System',
+        location: 'Shaheed Benazirabad',
+        roles: [
+          { title: 'Assistant Administrator', period: '' },
+          { title: 'Staff Incharge', period: '' },
+        ],
+        description: 'Assisted in school administration and management, overseeing staff coordination and operational workflows.',
+        icon: 'fa-school',
+      },
+      {
+        company: 'CyberGuardiansSociety',
+        location: 'Online Community',
+        roles: [
+          { title: 'Founder', period: '' },
+          { title: 'CEO', period: '' },
+          { title: 'Director', period: '' },
+        ],
+        description: 'Founded and leads an online cybersecurity community focused on education, CTF competitions, and building a network of security enthusiasts.',
+        icon: 'fa-shield',
+      },
+    ];
+    res.render('pages/experience', { title: 'Experience — Shayan Ahmed', experiences });
   });
 
   router.use('/projects', projectsRoutes(prisma));

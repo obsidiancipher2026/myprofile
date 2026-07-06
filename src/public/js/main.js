@@ -1,61 +1,206 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Mobile nav toggle
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  const navBackdrop = document.getElementById('navBackdrop');
-  function toggleNav(open) {
-    navToggle.classList.toggle('active', open);
-    navLinks.classList.toggle('open', open);
-    if (navBackdrop) navBackdrop.classList.toggle('open', open);
+  'use strict';
+
+  // --- Theme Toggle ---
+  var html = document.documentElement;
+  var themeToggle = document.getElementById('themeToggle');
+  var themeToggleMobile = document.getElementById('themeToggleMobile');
+  var themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
+  var themeIconMobile = themeToggleMobile ? themeToggleMobile.querySelector('i') : null;
+  var themeTextMobile = themeToggleMobile ? themeToggleMobile.querySelector('span') : null;
+
+  function getTheme() { return html.getAttribute('data-theme') || 'dark'; }
+
+  function setTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    var isDark = theme === 'dark';
+    if (themeIcon) {
+      themeIcon.className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+    }
+    if (themeIconMobile) {
+      themeIconMobile.className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+    }
+    if (themeTextMobile) {
+      themeTextMobile.textContent = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+    }
   }
+
+  function toggleTheme() {
+    setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+  }
+
+  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+  // Set initial icon state
+  var initialTheme = getTheme();
+  if (themeIcon) themeIcon.className = initialTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+  if (themeIconMobile) themeIconMobile.className = initialTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+  if (themeTextMobile) themeTextMobile.textContent = initialTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+
+  // --- Mobile Nav ---
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  var navBackdrop = document.getElementById('navBackdrop');
+
+  function toggleNav(open) {
+    if (navToggle) navToggle.classList.toggle('active', open);
+    if (navLinks) navLinks.classList.toggle('open', open);
+    if (navBackdrop) navBackdrop.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', function () {
       toggleNav(!navLinks.classList.contains('open'));
     });
     if (navBackdrop) {
-      navBackdrop.addEventListener('click', function () {
-        toggleNav(false);
+      navBackdrop.addEventListener('click', function () { toggleNav(false); });
+    }
+    // Close on nav link click
+    navLinks.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () { toggleNav(false); });
+    });
+    // Close on mobile theme toggle click
+    if (themeToggleMobile) {
+      themeToggleMobile.addEventListener('click', function () { toggleNav(false); });
+    }
+  }
+
+  // --- Particle Network Canvas ---
+  var canvas = document.getElementById('particle-canvas');
+  if (canvas) {
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 60;
+    var mouseX = -1000;
+    var mouseY = -1000;
+
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    for (var i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        r: Math.random() * 2 + 1
       });
     }
-    document.addEventListener('click', function (e) {
-      if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
-        toggleNav(false);
+
+    canvas.addEventListener('mousemove', function (e) {
+      var rect = canvas.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    });
+    canvas.addEventListener('mouseleave', function () {
+      mouseX = -1000;
+      mouseY = -1000;
+    });
+
+    function getAccentColor() {
+      var style = getComputedStyle(document.documentElement);
+      return style.getPropertyValue('--accent').trim() || '#00d4ff';
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      var accent = getAccentColor();
+
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        // Mouse interaction
+        var dx = mouseX - p.x;
+        var dy = mouseY - p.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          p.x -= dx * 0.005;
+          p.y -= dy * 0.005;
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = accent;
+        ctx.globalAlpha = 0.5;
+        ctx.fill();
+
+        // Draw connections
+        for (var j = i + 1; j < particles.length; j++) {
+          var p2 = particles[j];
+          var dx2 = p.x - p2.x;
+          var dy2 = p.y - p2.y;
+          var dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+          if (dist2 < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = accent;
+            ctx.globalAlpha = (1 - dist2 / 120) * 0.2;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+  }
+
+  // --- Scroll Reveal Animations ---
+  var revealEls = document.querySelectorAll('[data-reveal]');
+
+  var staggerEls = document.querySelectorAll('[data-stagger]');
+
+  function checkReveal() {
+    var windowH = window.innerHeight;
+    revealEls.forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < windowH * 0.88) {
+        el.classList.add('revealed');
+      }
+    });
+    staggerEls.forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < windowH * 0.88) {
+        el.classList.add('revealed');
       }
     });
   }
 
-  // Project modal
-  const modal = document.getElementById('projectModal');
-  const modalBody = document.getElementById('modalBody');
-  const modalClose = document.querySelector('.modal-close');
+  if (revealEls.length || staggerEls.length) {
+    checkReveal();
+    window.addEventListener('scroll', checkReveal);
+    window.addEventListener('resize', checkReveal);
+  }
+
+  // --- Project Modal ---
+  var modal = document.getElementById('projectModal');
+  var modalBody = document.getElementById('modalBody');
+  var modalClose = document.querySelector('.modal-close');
 
   if (modal && modalBody) {
-    // Gallery detail buttons
-    document.querySelectorAll('.gallery-details-btn').forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        const id = this.getAttribute('data-id');
-        openProjectModal(id);
-      });
-    });
-
-    // Gallery item click
-    document.querySelectorAll('.gallery-item').forEach(function (item) {
-      item.addEventListener('click', function () {
-        const id = this.getAttribute('data-id');
-        openProjectModal(id);
-      });
-    });
-
-    // Project card click
-    document.querySelectorAll('.project-card').forEach(function (card) {
+    // Project card clicks
+    document.querySelectorAll('.project-card[data-id]').forEach(function (card) {
       card.addEventListener('click', function () {
-        const id = this.getAttribute('data-id');
-        openProjectModal(id);
+        openProjectModal(this.getAttribute('data-id'));
       });
     });
 
-    // Close modal
     if (modalClose) {
       modalClose.addEventListener('click', closeModal);
     }
@@ -96,49 +241,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function closeModal() {
-    if (modal) {
-      modal.classList.remove('active');
-    }
-  }
-
-  // Skill progress bar animation on scroll
-  var skillFill = document.querySelectorAll('.skill-card-fill');
-  if (skillFill.length) {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var el = entry.target;
-          var level = el.getAttribute('data-level');
-          if (level) {
-            el.style.width = level + '%';
-            el.classList.add('animated');
-          }
-          observer.unobserve(el);
-        }
-      });
-    }, { threshold: 0.3 });
-    skillFill.forEach(function (el) {
-      el.style.width = '0%';
-      observer.observe(el);
-    });
-  }
-
-  // Nav active state based on scroll
-  var sections = document.querySelectorAll('.section[id]');
-  if (sections.length) {
-    window.addEventListener('scroll', function () {
-      var scrollPos = window.scrollY + 200;
-      sections.forEach(function (sec) {
-        var top = sec.offsetTop;
-        var height = sec.offsetHeight;
-        var id = sec.getAttribute('id');
-        if (scrollPos >= top && scrollPos < top + height) {
-          document.querySelectorAll('.nav-links a').forEach(function (link) {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + id) link.classList.add('active');
-          });
-        }
-      });
-    });
+    if (modal) modal.classList.remove('active');
   }
 });

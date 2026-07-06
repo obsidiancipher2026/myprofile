@@ -5,28 +5,35 @@
   <div class="container">
     <h1>Project <span class="accent">Gallery</span></h1>
     <div class="section-line"></div>
+    <p>Real projects built with cybersecurity and full-stack expertise</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="projects-gallery">
+    <div class="projects-grid" data-stagger>
       <% if (projects && projects.length) { %>
         <% projects.forEach(function(project) { %>
-          <div class="gallery-item" data-id="<%= project.id %>">
-            <div class="gallery-image">
+          <div class="project-card" data-id="<%= project.id %>">
+            <div class="project-card-image">
               <% if (project.imageUrl) { %>
                 <img src="<%= project.imageUrl %>" alt="<%= project.title %>" loading="lazy">
               <% } else { %>
-                <div class="gallery-placeholder"><i class="fas fa-shield"></i></div>
-              <% } %>
-              <div class="gallery-overlay">
-                <div class="gallery-info">
-                  <h3><%= project.title %></h3>
-                  <p><%= project.description?.substring(0, 100) %></p>
-                  <button class="btn btn-small gallery-details-btn" data-id="<%= project.id %>">View Details</button>
+                <div class="project-card-icon">
+                  <i class="fas fa-shield-halved"></i>
                 </div>
-              </div>
+              <% } %>
+            </div>
+            <div class="project-card-body">
+              <h3><%= project.title %></h3>
+              <p><%= project.description?.substring(0, 120) %><%= project.description?.length > 120 ? '...' : '' %></p>
+              <% if (project.techStack) { %>
+                <div class="project-tags">
+                  <% project.techStack.split(',').forEach(function(tag) { %>
+                    <span class="tag"><%= tag.trim() %></span>
+                  <% }); %>
+                </div>
+              <% } %>
             </div>
           </div>
         <% }); %>
@@ -37,6 +44,9 @@
           <p>Projects are being added. Check back soon.</p>
         </div>
       <% } %>
+    </div>
+    <div style="text-align:center;margin-top:40px;color:var(--text-muted);font-size:0.85rem;">
+      <i class="fas fa-info-circle"></i> Live demo links and GitHub repositories will be added once available.
     </div>
   </div>
 </section>

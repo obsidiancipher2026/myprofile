@@ -25,23 +25,21 @@ async function main() {
   });
 
   const skills = [
-    { name: 'Ethical Hacking', level: 90, category: 'Offensive Security', sortOrder: 1 },
-    { name: 'Threat Hunting', level: 85, category: 'Defensive Security', sortOrder: 2 },
-    { name: 'SOC Operations', level: 88, category: 'Defensive Security', sortOrder: 3 },
-    { name: 'DFIR', level: 82, category: 'Incident Response', sortOrder: 4 },
-    { name: 'Python Development', level: 92, category: 'Development', sortOrder: 5 },
-    { name: 'Networking Analysis', level: 85, category: 'Infrastructure', sortOrder: 6 },
-    { name: 'Malware Investigation', level: 80, category: 'Reverse Engineering', sortOrder: 7 },
-    { name: 'AI-driven Security Tools', level: 75, category: 'Innovation', sortOrder: 8 },
+    { name: 'Python Programming', level: 0, category: 'Development', sortOrder: 1 },
+    { name: 'Cybersecurity & Ethical Hacking', level: 0, category: 'Security', sortOrder: 2 },
+    { name: 'Data Entry Management', level: 0, category: 'Operations', sortOrder: 3 },
+    { name: 'Front & Backend Developer', level: 0, category: 'Development', sortOrder: 4 },
+    { name: 'Web Penetration Testing', level: 0, category: 'Security', sortOrder: 5 },
+    { name: 'Digital Forensics', level: 0, category: 'Security', sortOrder: 6 },
+    { name: 'Cryptography & Steganography', level: 0, category: 'Security', sortOrder: 7 },
+    { name: 'Full Stack Developer', level: 0, category: 'Development', sortOrder: 8 },
+    { name: 'Complete Linux Operating System', level: 0, category: 'Systems & Tools', sortOrder: 9 },
+    { name: 'Web Data Scraping', level: 0, category: 'Development', sortOrder: 10 },
+    { name: 'Burpsuite & Wireshark Expert', level: 0, category: 'Systems & Tools', sortOrder: 11 },
+    { name: 'End-to-End Encrypted Communication', level: 0, category: 'Security', sortOrder: 12 },
+    { name: 'Computer Hardware Management', level: 0, category: 'Operations', sortOrder: 13 },
   ];
   for (const s of skills) await prisma.skill.create({ data: s });
-
-  const certs = [
-    { title: 'Certified Ethical Hacker (CEH)', issuer: 'EC-Council', date: new Date('2025-03-15') },
-    { title: 'CompTIA Security+', issuer: 'CompTIA', date: new Date('2024-11-20') },
-    { title: 'Practical Network Penetration Tester', issuer: 'TCM Security', date: new Date('2025-06-01') },
-  ];
-  for (const c of certs) await prisma.certification.create({ data: c });
 
   console.log('Seed completed successfully.');
 }

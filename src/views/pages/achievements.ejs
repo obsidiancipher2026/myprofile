@@ -1,0 +1,38 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Achievements &amp; <span class="accent">CTF Results</span></h1>
+    <div class="section-line"></div>
+    <p>Competition rankings from national and international cybersecurity events</p>
+  </div>
+</section>
+
+<section class="section" data-reveal>
+  <div class="container">
+    <div class="achievements-grid" data-stagger>
+      <% achievements.forEach(function(ach) { %>
+        <div class="achievement-card">
+          <div class="achievement-rank <%= ach.type %>">
+            <% if (ach.type === 'gold') { %>
+              <i class="fas fa-trophy"></i>
+            <% } else if (ach.type === 'silver') { %>
+              <i class="fas fa-medal"></i>
+            <% } else if (ach.type === 'bronze') { %>
+              <i class="fas fa-award"></i>
+            <% } else { %>
+              <i class="fas fa-flag"></i>
+            <% } %>
+          </div>
+          <div class="achievement-body">
+            <h4><%= ach.title %></h4>
+            <p><strong class="<%= ach.type === 'gold' ? 'accent' : 'accent-secondary' %>"><%= ach.rank %></strong></p>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

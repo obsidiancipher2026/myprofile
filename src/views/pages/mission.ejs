@@ -8,15 +8,11 @@
   </div>
 </section>
 
-<section class="section mission-page">
+<section class="section" data-reveal>
   <div class="container">
-    <div class="mission-hero-block">
-      <div class="mission-glitch-effect">
-        <div class="mission-shield">
-          <i class="fas fa-shield"></i>
-        </div>
-      </div>
-      <blockquote class="mission-statement">
+    <div class="mission-block">
+      <div class="mission-icon"><i class="fas fa-shield"></i></div>
+      <blockquote>
         <% if (mission) { %>
           "<%= mission.content %>"
         <% } else { %>
@@ -27,21 +23,21 @@
         <span class="accent">— Shayan Ahmed</span>
       </div>
     </div>
-    <div class="mission-values">
+    <div class="mission-values" data-stagger>
       <div class="value-card">
         <i class="fas fa-eye"></i>
         <h3>Think Like an Attacker</h3>
-        <p>Understanding adversarial mindset to predict and prevent breaches before they happen.</p>
+        <p>Understanding the adversarial mindset to predict and prevent breaches before they happen — anticipating every move an attacker could make.</p>
       </div>
       <div class="value-card">
         <i class="fas fa-shield-alt"></i>
         <h3>Act Like a Defender</h3>
-        <p>Building robust defenses with proactive monitoring, detection, and response strategies.</p>
+        <p>Building robust defenses with proactive monitoring, detection, and response strategies. Leading the CyberGuardiansSociety community to foster security awareness.</p>
       </div>
       <div class="value-card">
         <i class="fas fa-robot"></i>
         <h3>Innovate with AI</h3>
-        <p>Leveraging artificial intelligence to create next-generation security tools and solutions.</p>
+        <p>Leveraging artificial intelligence to create next-generation security tools and solutions — from deepfake detection to AI-powered threat analysis.</p>
       </div>
     </div>
   </div>

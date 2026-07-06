@@ -3,29 +3,63 @@
 
 <section class="page-hero">
   <div class="container">
-    <h1>Certifications</h1>
+    <h1>Certifications &amp; <span class="accent">Achievements</span></h1>
     <div class="section-line"></div>
+    <p>Professional certifications and competition achievements from the CV</p>
   </div>
 </section>
 
-<section class="section">
+<section class="section section-alt" data-reveal>
   <div class="container">
     <div class="section-header">
-      <h2>On-Site <span class="accent">Certifications</span></h2>
+      <h2>Professional <span class="accent">Certifications</span></h2>
       <div class="section-line"></div>
     </div>
-    <div class="certs-row">
+    <div class="certs-grid" data-stagger>
       <% cvCerts.forEach(function(cert) { %>
-        <div class="cert-card-h">
-          <div class="cert-card-h-icon">
-            <i class="fas fa-scroll"></i>
+        <div class="cert-card">
+          <div class="cert-card-icon">
+            <i class="fas fa-certificate"></i>
           </div>
-          <div class="cert-card-h-body">
+          <div class="cert-card-body">
             <h4><%= cert.title %></h4>
-            <% if (cert.issuer) { %>
-              <span class="cert-h-issuer"><i class="fas fa-building"></i> <%= cert.issuer %></span>
+            <div class="cert-meta">
+              <% if (cert.issuer) { %>
+                <span><i class="fas fa-building"></i> <%= cert.issuer %></span>
+              <% } %>
+              <span><i class="fas fa-clock"></i> <%= cert.duration %></span>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<section class="section" data-reveal>
+  <div class="container">
+    <div class="section-header">
+      <h2>Competition <span class="accent-secondary">Achievements</span></h2>
+      <div class="section-line"></div>
+      <p>Real competitive results from national and international CTF events</p>
+    </div>
+    <div class="achievements-grid" data-stagger>
+      <% achievements.forEach(function(ach) { %>
+        <div class="achievement-card">
+          <div class="achievement-rank <%= ach.type %>">
+            <% if (ach.type === 'gold') { %>
+              <i class="fas fa-trophy"></i>
+            <% } else if (ach.type === 'silver') { %>
+              <i class="fas fa-medal"></i>
+            <% } else if (ach.type === 'bronze') { %>
+              <i class="fas fa-award"></i>
+            <% } else { %>
+              <i class="fas fa-flag"></i>
             <% } %>
-            <span class="cert-h-duration"><i class="fas fa-clock"></i> <%= cert.duration %></span>
+          </div>
+          <div class="achievement-body">
+            <h4><%= ach.title %></h4>
+            <p><strong class="<%= ach.type === 'gold' ? 'accent' : 'accent-secondary' %>"><%= ach.rank %></strong></p>
           </div>
         </div>
       <% }); %>

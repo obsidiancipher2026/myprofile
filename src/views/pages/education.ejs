@@ -5,81 +5,42 @@
   <div class="container">
     <h1>My <span class="accent">Education</span></h1>
     <div class="section-line"></div>
+    <p>Corrected academic records sourced from official CV</p>
   </div>
 </section>
 
-<section class="section">
+<section class="section" data-reveal>
   <div class="container">
-    <div class="edu-timeline">
-      <div class="edu-card">
-        <div class="edu-card-header">
-          <div class="edu-icon"><i class="fas fa-school"></i></div>
-          <div class="edu-meta">
-            <span class="edu-type">Matriculation (SSC)</span>
-            <span class="edu-year">2022 - 2024</span>
-          </div>
-        </div>
-        <div class="edu-card-body">
-          <h3>Quaid-e-Azam Rangers School & College</h3>
-          <p class="edu-location"><i class="fas fa-map-marker-alt"></i> Nawabshah</p>
-          <div class="edu-details">
-            <div class="edu-stat">
-              <span class="edu-stat-label">Part 1 (9th)</span>
-              <span class="edu-stat-value">79.45%</span>
-              <span class="edu-stat-sub">(437 / 550)</span>
-            </div>
-            <div class="edu-stat">
-              <span class="edu-stat-label">Part 2 (10th)</span>
-              <span class="edu-stat-value">77.73%</span>
-              <span class="edu-stat-sub">(855 / 1100)</span>
+    <div class="edu-grid" data-stagger>
+      <% education.forEach(function(edu) { %>
+        <div class="edu-card">
+          <div class="edu-card-header">
+            <div class="edu-icon"><i class="fas <%= edu.icon %>"></i></div>
+            <div class="edu-meta">
+              <span class="edu-type"><%= edu.level %></span>
+              <span class="edu-year"><%= edu.years %></span>
             </div>
           </div>
-          <div class="edu-grade">A Grade</div>
-        </div>
-      </div>
-
-      <div class="edu-card">
-        <div class="edu-card-header">
-          <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-          <div class="edu-meta">
-            <span class="edu-type">Intermediate (HSSC)</span>
-            <span class="edu-year">2024 - 2025</span>
+          <div class="edu-card-body">
+            <h3><%= edu.school %></h3>
+            <p class="edu-location"><i class="fas fa-map-marker-alt"></i> <%= edu.location %></p>
+            <% if (edu.parts.length > 0) { %>
+              <div class="edu-details">
+                <% edu.parts.forEach(function(part) { %>
+                  <div class="edu-stat">
+                    <span class="edu-stat-label"><%= part.label %></span>
+                    <span class="edu-stat-value"><%= part.pct %></span>
+                    <span class="edu-stat-sub">(<%= part.value %>)</span>
+                  </div>
+                <% }); %>
+              </div>
+              <div class="edu-grade"><%= edu.grade %></div>
+            <% } else { %>
+              <div class="edu-grade" style="border-color: var(--accent-dim); color: var(--text-secondary); border-style: dashed;"><%= edu.grade %></div>
+            <% } %>
           </div>
         </div>
-        <div class="edu-card-body">
-          <h3>Quaid-e-Azam Rangers School & College</h3>
-          <p class="edu-location"><i class="fas fa-map-marker-alt"></i> Nawabshah</p>
-          <div class="edu-details">
-            <div class="edu-stat">
-              <span class="edu-stat-label">Part 1 (11th)</span>
-              <span class="edu-stat-value">90.91%</span>
-              <span class="edu-stat-sub">(500 / 550)</span>
-            </div>
-            <div class="edu-stat">
-              <span class="edu-stat-label">Part 2 (12th)</span>
-              <span class="edu-stat-value">72.91%</span>
-              <span class="edu-stat-sub">(802 / 1100)</span>
-            </div>
-          </div>
-          <div class="edu-grade">A Grade</div>
-        </div>
-      </div>
-
-      <div class="edu-card">
-        <div class="edu-card-header">
-          <div class="edu-icon"><i class="fas fa-user-graduate"></i></div>
-          <div class="edu-meta">
-            <span class="edu-type">Bachelor of Science</span>
-            <span class="edu-year">Continue</span>
-          </div>
-        </div>
-        <div class="edu-card-body">
-          <h3>BS Cybersecurity</h3>
-          <p class="edu-location"><i class="fas fa-building"></i> QUEST Nawabshah</p>
-          <div class="edu-grade" style="border-color: var(--accent-dim); color: var(--text-secondary);">In Progress</div>
-        </div>
-      </div>
-
+      <% }); %>
     </div>
   </div>
 </section>

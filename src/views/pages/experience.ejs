@@ -1,0 +1,34 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Work <span class="accent">Experience</span></h1>
+    <div class="section-line"></div>
+    <p>Professional background and community leadership</p>
+  </div>
+</section>
+
+<section class="section" data-reveal>
+  <div class="container">
+    <div class="exp-grid" data-stagger>
+      <% experiences.forEach(function(exp) { %>
+        <div class="exp-card">
+          <div class="exp-icon"><i class="fas <%= exp.icon %>"></i></div>
+          <div class="exp-body">
+            <h4><%= exp.company %></h4>
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:8px;"><i class="fas fa-map-marker-alt" style="color:var(--accent);font-size:0.7rem;"></i> <%= exp.location %></p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+              <% exp.roles.forEach(function(role) { %>
+                <span class="tag" style="background:var(--accent-dim-2);color:var(--accent-secondary);"><%= role.title %><%= role.period ? ' (' + role.period + ')' : '' %></span>
+              <% }); %>
+            </div>
+            <p><%= exp.description %></p>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

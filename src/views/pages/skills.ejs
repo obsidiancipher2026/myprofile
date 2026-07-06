@@ -3,39 +3,43 @@
 
 <section class="page-hero">
   <div class="container">
-    <div class="hero-glitch-bg"></div>
     <h1>Technical <span class="accent">Skills</span></h1>
     <div class="section-line"></div>
+    <p>13 core skills across security, development, systems, and operations</p>
   </div>
 </section>
 
-<section class="section">
+<section class="section" data-reveal>
   <div class="container">
-    <div class="skills-grid">
-      <% const iconMap = {
-        'Ethical Hacking': 'fa-skull', 'Bug Bounty Hunting': 'fa-bug', 'OSINT & Reconnaissance': 'fa-search',
-        'Threat Hunting': 'fa-crosshairs', 'Python Development': 'fa-code', 'Networking Analysis': 'fa-network-wired',
-        'Malware Investigation': 'fa-flask', 'AI-driven Security Tools': 'fa-robot'
-      }; %>
-      <% skills.forEach(function(skill, idx) { %>
-        <div class="skill-card" style="animation-delay: <%= idx * 0.08 %>s">
-          <div class="skill-card-inner">
-            <div class="skill-card-icon">
-              <i class="fas <%= iconMap[skill.name] || 'fa-shield' %>"></i>
-            </div>
-            <h3 class="skill-card-title"><%= skill.name %></h3>
-            <% if (skill.category) { %><span class="skill-card-subtitle"><%= skill.category %></span><% } %>
-            <div class="skill-card-bar">
-              <div class="skill-card-fill" style="width: 0%" data-level="<%= skill.level %>">
-                <div class="skill-card-glow"></div>
-              </div>
-            </div>
-            <div class="skill-card-level">
-              <span class="skill-card-pct"><%= skill.level %>%</span>
-              <span class="skill-card-label">Proficiency</span>
-            </div>
+    <div class="skills-category-grid" data-stagger>
+      <% categories.forEach(function(cat) { %>
+        <div class="skill-cat-card">
+          <div class="skill-cat-icon"><i class="fas <%= cat.icon %>"></i></div>
+          <h4><%= cat.name %></h4>
+          <span class="cat-label"><%= cat.skills.length %> Skills</span>
+          <div class="skill-list">
+            <% cat.skills.forEach(function(s) { %>
+              <span><i class="fas fa-circle"></i> <%= s %></span>
+            <% }); %>
           </div>
         </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" data-reveal>
+  <div class="container">
+    <div class="section-header">
+      <h2>Complete <span class="accent">Skills</span></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-tag-grid" data-stagger>
+      <% skills.forEach(function(skill) { %>
+        <span class="skill-tag">
+          <i class="fas <%= skill.icon || 'fa-shield' %>"></i>
+          <%= skill.name %>
+        </span>
       <% }); %>
     </div>
   </div>
