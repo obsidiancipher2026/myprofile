@@ -569,12 +569,14 @@ p { color: var(--text-secondary); line-height: 1.8; }
   display: flex; align-items: center; justify-content: center;
   font-size: 1rem; color: var(--text-secondary);
   border: 1px solid var(--border); transition: var(--transition);
+  overflow: hidden; flex-shrink: 0;
 }
 .social-icon:hover { transform: translateY(-3px); }
 .social-icon.linkedin:hover { color: #0a66c2; border-color: #0a66c2; box-shadow: 0 0 20px rgba(10,102,194,0.3); }
 .social-icon.youtube:hover { color: #ff0000; border-color: #ff0000; box-shadow: 0 0 20px rgba(255,0,0,0.3); }
 .social-icon.whatsapp:hover { color: #25d366; border-color: #25d366; box-shadow: 0 0 20px rgba(37,211,102,0.3); }
 .social-icon.github:hover { color: var(--text-primary); border-color: var(--text-primary); box-shadow: 0 0 20px rgba(255,255,255,0.15); }
+.social-icon.fiverr:hover { color: #1dbf73; border-color: #1dbf73; box-shadow: 0 0 20px rgba(29,191,115,0.3); }
 
 /* --- Footer --- */
 .cyber-footer { background: var(--bg-secondary); border-top: 1px solid var(--border); padding: var(--space-2xl) var(--space-lg) var(--space-lg); }
