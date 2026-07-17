@@ -144,13 +144,21 @@ module.exports = function (prisma, contactLimiter) {
       { name: 'Burpsuite & Wireshark Expert', category: 'Systems & Tools', icon: 'fa-network-wired' },
       { name: 'End-to-End Encrypted Communication', category: 'Security', icon: 'fa-key' },
       { name: 'Computer Hardware Management', category: 'Operations', icon: 'fa-microchip' },
+      { name: 'HR & PR Management', category: 'Operations', icon: 'fa-users' },
+      { name: 'OSINT', category: 'Security', icon: 'fa-search-plus' },
+      { name: 'MySQL Database Management', category: 'Development', icon: 'fa-database' },
+      { name: 'Adobe Photoshop', category: 'Designing', icon: 'fa-paint-brush' },
+      { name: 'Adobe Illustrator', category: 'Designing', icon: 'fa-bezier-curve' },
+      { name: 'Canva', category: 'Designing', icon: 'fa-palette' },
+      { name: 'Figma', category: 'Designing', icon: 'fa-object-group' },
     ];
 
     const categories = [
-      { name: 'Security', icon: 'fa-shield', skills: ['Cybersecurity & Ethical Hacking', 'Web Penetration Testing', 'Digital Forensics', 'Cryptography & Steganography', 'End-to-End Encrypted Communication'] },
-      { name: 'Development', icon: 'fa-code', skills: ['Python Programming', 'Front & Backend Developer', 'Full Stack Developer', 'Web Data Scraping'] },
+      { name: 'Security', icon: 'fa-shield', skills: ['Cybersecurity & Ethical Hacking', 'Web Penetration Testing', 'Digital Forensics', 'Cryptography & Steganography', 'End-to-End Encrypted Communication', 'OSINT'] },
+      { name: 'Development', icon: 'fa-code', skills: ['Python Programming', 'Front & Backend Developer', 'Full Stack Developer', 'Web Data Scraping', 'MySQL Database Management'] },
       { name: 'Systems & Tools', icon: 'fa-terminal', skills: ['Complete Linux Operating System', 'Burpsuite & Wireshark Expert', 'Computer Hardware Management'] },
-      { name: 'Operations', icon: 'fa-database', skills: ['Data Entry Management'] },
+      { name: 'Operations', icon: 'fa-database', skills: ['Data Entry Management', 'HR & PR Management'] },
+      { name: 'Designing', icon: 'fa-paint-brush', skills: ['Adobe Photoshop', 'Adobe Illustrator', 'Canva', 'Figma'] },
     ];
 
     res.render('pages/skills', { title: 'Skills — Shayan Ahmed', skills: allSkills, categories });
@@ -228,6 +236,15 @@ module.exports = function (prisma, contactLimiter) {
         ],
         description: 'Founded and leads an online cybersecurity community focused on education, CTF competitions, and building a network of security enthusiasts.',
         icon: 'fa-shield',
+      },
+      {
+        company: 'Youth Empowerment',
+        location: '',
+        roles: [
+          { title: 'Member of HR & PR Team', period: '' },
+        ],
+        description: 'Contributed to human resources and public relations efforts, supporting team coordination and outreach initiatives.',
+        icon: 'fa-users',
       },
     ];
     res.render('pages/experience', { title: 'Experience — Shayan Ahmed', experiences });

@@ -9,6 +9,7 @@ module.exports = function () {
   router.get('/youtube', socialController.youtube);
   router.get('/whatsapp', socialController.whatsapp);
   router.get('/github', socialController.github);
+  router.get('/fiverr', socialController.fiverr);
 
   return router;
 };
