@@ -108,6 +108,7 @@ module.exports = function (prisma, contactLimiter) {
       { title: 'Youth Empowerment CTF 2026', rank: '17th Position', type: 'bronze' },
       { title: 'BoroCTF 2026', rank: '370th Position', type: 'participant' },
       { title: 'Hacktheon Sejong International Cybersecurity Competition (South Korea)', rank: '15th Position', type: 'silver' },
+      { title: 'NineByte CTF', rank: '15th Position', type: 'silver' },
     ];
     res.render('pages/certifications', {
       title: 'Certifications & Achievements — Shayan Ahmed',
@@ -123,6 +124,7 @@ module.exports = function (prisma, contactLimiter) {
       { title: 'Youth Empowerment CTF 2026', rank: '17th Position', type: 'bronze' },
       { title: 'BoroCTF 2026', rank: '370th Position', type: 'participant' },
       { title: 'Hacktheon Sejong International Cybersecurity Competition (South Korea)', rank: '15th Position', type: 'silver' },
+      { title: 'NineByte CTF', rank: '15th Position', type: 'silver' },
     ];
     res.render('pages/achievements', { title: 'Achievements — Shayan Ahmed', achievements });
   });
